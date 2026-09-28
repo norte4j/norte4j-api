@@ -1,6 +1,18 @@
-import {IsArray, IsBoolean, IsInt, IsIn, IsOptional, IsString, IsUrl} from 'class-validator';
+import {Type} from 'class-transformer';
+import {ArrayMaxSize, IsArray, IsBoolean, IsIn, IsInt, IsOptional, IsString, IsUrl, Min, ValidateNested} from 'class-validator';
+
+class SocialLinkDto {
+  @IsUrl({allow_protocol_relative_urls: true}) url: string;
+  @IsIn(['link', 'linkedin', 'facebook', 'github', 'instagram']) icone: string;
+}
 
 export class ResourceDto {
+  @IsOptional() @IsString() nome?: string;
+  @IsOptional() @IsInt() @Min(0) idade?: number;
+  @IsOptional() @IsString() papel?: string;
+  @IsOptional() @IsString() foto?: string;
+  @IsOptional() @IsArray() @ArrayMaxSize(4) @ValidateNested({each: true}) @Type(() => SocialLinkDto)
+  redes_sociais?: SocialLinkDto[];
   @IsOptional() @IsString() title?: string;
   @IsOptional() @IsString() name?: string;
   @IsOptional() @IsString() slug?: string;
