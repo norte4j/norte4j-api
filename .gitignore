@@ -1,0 +1,7 @@
+node_modules
+.idea
+.env
+package-lock.json
+norte4j-firebase-adminsdk-fbsvc-50db3b004d.json
+dist
+uploads

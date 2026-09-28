@@ -1,0 +1,27 @@
+import {Module} from '@nestjs/common';
+import {ConfigModule} from '@nestjs/config';
+import {ConfigService} from '@nestjs/config';
+import {TypeOrmModule} from '@nestjs/typeorm';
+import {AuthModule} from './auth/auth.module';
+import {ResourcesModule} from './resources/resources.module';
+import {UploadsModule} from './uploads/uploads.module';
+import {ConfigStoreModule} from './config/config-store.module';
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({isGlobal: true}),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService], useFactory: (config: ConfigService) => ({
+        type: 'mysql', host: config.get('DB_HOST', 'localhost'), port: config.get<number>('DB_PORT', 3306),
+        username: config.get('DB_USERNAME', 'root'), password: config.get('DB_PASSWORD', ''),
+        database: config.get('DB_DATABASE', 'norte4j'), autoLoadEntities: true,
+        synchronize: false,
+        migrationsRun: config.get('DB_MIGRATIONS_RUN', 'false') === 'true',
+        migrations: [__dirname + '/database/migrations/*{.ts,.js}'],
+      })
+    }),
+    AuthModule, ConfigStoreModule, ResourcesModule, UploadsModule,
+  ]
+})
+export class AppModule {
+}
