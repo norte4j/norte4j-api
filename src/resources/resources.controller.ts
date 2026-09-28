@@ -3,7 +3,7 @@ import {JwtAuthGuard} from '../auth/auth.guard';
 import {ResourceDto} from './resource.dto';
 import {ResourcesService} from './resources.service';
 
-const ALLOWED = ['events', 'workshops', 'gallery', 'partners', 'texts'];
+const ALLOWED = ['events', 'workshops', 'gallery', 'partners', 'texts', 'team'];
 
 @Controller()
 export class ResourcesController {

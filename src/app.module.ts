@@ -6,8 +6,10 @@ import {AuthModule} from './auth/auth.module';
 import {ResourcesModule} from './resources/resources.module';
 import {UploadsModule} from './uploads/uploads.module';
 import {ConfigStoreModule} from './config/config-store.module';
+import {HealthController} from './health/health.controller';
 
 @Module({
+  controllers: [HealthController],
   imports: [
     ConfigModule.forRoot({isGlobal: true}),
     TypeOrmModule.forRootAsync({
