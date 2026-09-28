@@ -39,4 +39,4 @@ O administrador de `ADMIN_EMAIL`/`ADMIN_PASSWORD` é criado na primeira iniciali
 Os arquivos são gravados no diretório definido por `UPLOAD_DIR` e publicados em `/uploads`. Em produção, monte esse diretório em volume persistente ou substitua o serviço por armazenamento S3 compatível.
 ## Upload de imagens no CMS
 
-Para eventos, workshops e parceiros, envie a imagem autenticada como multipart/form-data no campo ile para POST /api/uploads/images (at� 10 MB). A resposta cont�m url, path e 	ype; salve url no campo image, imageUrl ou src do recurso. O endpoint gen�rico POST /api/uploads continua aceitando imagens e v�deos de at� 50 MB.
+Para eventos, workshops e parceiros, envie a imagem autenticada como multipart/form-data no campo file para POST /api/uploads/images (até 10 MB). A resposta contém url, path e 	ype; salve url no campo image, imageUrl ou src do recurso. O endpoint genérico POST /api/uploads continua aceitando imagens e vídeos de até 50 MB.
