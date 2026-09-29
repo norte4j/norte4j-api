@@ -1,5 +1,18 @@
 # Norte4j API
 
+## Observabilidade
+
+A API expõe métricas Prometheus em `GET /api/metrics`. O endpoint inclui métricas padrão do processo Node.js e as métricas HTTP abaixo:
+
+O endpoint exige a variável `METRICS_API_KEY` e aceita a credencial por `Authorization: ApiKey <chave>` ou `X-API-Key: <chave>`. Não existe fallback sem autenticação; sem configuração, o endpoint responde `503`.
+
+- `norte4j_http_requests_total`
+- `norte4j_http_request_duration_seconds`
+- `norte4j_http_requests_in_flight`
+- `norte4j_http_response_size_bytes`
+
+As métricas HTTP usam somente as labels `method`, `route` e `status_code`; a rota é o template do endpoint, evitando cardinalidade causada por IDs e slugs.
+
 API NestJS com MySQL, TypeORM e autenticação JWT para o site e CMS Norte4j.
 
 ## Configuração
