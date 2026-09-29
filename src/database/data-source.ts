@@ -15,7 +15,7 @@ export default new DataSource({
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_DATABASE || 'norte4j',
   entities: [User, ContentResource, SiteConfig],
-  migrations: ['src/database/migrations/*.ts'],
+  migrations: [__dirname + '/migrations/*{.ts,.js}'],
   migrationsTableName: 'typeorm_migrations',
   synchronize: false,
   logging: process.env.DB_LOGGING === 'true',
