@@ -14,6 +14,7 @@ import {randomUUID} from 'crypto';
 import {mkdir, unlink, writeFile} from 'fs/promises';
 import {extname, join} from 'path';
 import {JwtAuthGuard} from '../auth/auth.guard';
+import {resolveUploadDirectory} from './upload-path';
 
 @Controller('uploads')
 @UseGuards(JwtAuthGuard)
@@ -25,7 +26,7 @@ export class UploadsController {
   async upload(@UploadedFile() file?: Express.Multer.File) {
     if (!file || !/^(image|video)\//.test(file.mimetype)) throw new BadRequestException('Envie uma imagem ou vídeo de até 50 MB');
     const filename = `${Date.now()}-${randomUUID()}${extname(file.originalname).toLowerCase()}`;
-    const directory = join(process.cwd(), this.config.get('UPLOAD_DIR', 'uploads'));
+    const directory = resolveUploadDirectory(this.config.get('UPLOAD_DIR', 'uploads'));
     await mkdir(directory, {recursive: true});
     await writeFile(join(directory, filename), file.buffer);
     const baseUrl = this.config.get('API_PUBLIC_URL', 'http://localhost:3000').replace(/\/$/, '');
@@ -49,7 +50,7 @@ export class UploadsController {
   @Delete(':filename') async remove(@Param('filename') filename: string) {
     if (filename !== filename.replace(/[^a-zA-Z0-9._-]/g, '')) throw new BadRequestException('Nome inválido');
     try {
-      await unlink(join(process.cwd(), this.config.get('UPLOAD_DIR', 'uploads'), filename));
+      await unlink(join(resolveUploadDirectory(this.config.get('UPLOAD_DIR', 'uploads')), filename));
     } catch { /* idempotente */
     }
     return {deleted: true};

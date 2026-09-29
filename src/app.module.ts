@@ -8,6 +8,7 @@ import {UploadsModule} from './uploads/uploads.module';
 import {ConfigStoreModule} from './config/config-store.module';
 import {HealthController} from './health/health.controller';
 import {MetricsModule} from './metrics/metrics.module';
+import {AnalyticsModule} from './analytics/analytics.module';
 
 @Module({
   controllers: [HealthController],
@@ -23,7 +24,7 @@ import {MetricsModule} from './metrics/metrics.module';
         migrations: [__dirname + '/database/migrations/*{.ts,.js}'],
       })
     }),
-    AuthModule, ConfigStoreModule, UploadsModule, MetricsModule, ResourcesModule,
+    AuthModule, ConfigStoreModule, UploadsModule, MetricsModule, AnalyticsModule, ResourcesModule,
   ]
 })
 export class AppModule {

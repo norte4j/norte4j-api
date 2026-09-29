@@ -13,6 +13,8 @@ O endpoint exige a variável `METRICS_API_KEY` e aceita a credencial por `Author
 
 As métricas HTTP usam somente as labels `method`, `route` e `status_code`; a rota é o template do endpoint, evitando cardinalidade causada por IDs e slugs.
 
+O site envia eventos públicos para `POST /api/analytics/events`. As métricas incluem visitas únicas diárias, page views, sessões, cliques etiquetados, origem, dispositivo, profundidade de rolagem e tempo de engajamento. O identificador anônimo é transformado em HMAC no backend usando `ANALYTICS_SALT` (com `JWT_SECRET` como fallback) e nunca é exposto como label Prometheus.
+
 API NestJS com MySQL, TypeORM e autenticação JWT para o site e CMS Norte4j.
 
 ## Configuração

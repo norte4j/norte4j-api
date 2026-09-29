@@ -14,5 +14,6 @@ import {MetricsService} from './metrics.service';
     MetricsApiKeyGuard,
     {provide: APP_INTERCEPTOR, useClass: MetricsInterceptor},
   ],
+  exports: [MetricsService],
 })
 export class MetricsModule {}
