@@ -23,7 +23,7 @@ import {MetricsModule} from './metrics/metrics.module';
         migrations: [__dirname + '/database/migrations/*{.ts,.js}'],
       })
     }),
-    AuthModule, ConfigStoreModule, ResourcesModule, UploadsModule, MetricsModule,
+    AuthModule, ConfigStoreModule, UploadsModule, MetricsModule, ResourcesModule,
   ]
 })
 export class AppModule {
