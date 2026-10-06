@@ -1,0 +1,46 @@
+name: Solicitar funcionalidade
+description: Proponha uma melhoria para a API ou para a experiência de contribuição
+title: "[FEATURE] "
+labels: ["enhancement", "triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema ou oportunidade
+      description: Quem é afetado e por que isso importa?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Solução proposta
+      description: Descreva contrato, fluxo e comportamento esperado.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Impacto de compatibilidade
+      description: Explique efeitos no site, CMS, banco e API atual.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceite sugeridos
+      placeholder: "- [ ] Critério verificável"
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Verificações
+      options:
+        - label: Procurei propostas duplicadas.
+          required: true
+        - label: A proposta não contém segredos ou dados pessoais.
+          required: true
