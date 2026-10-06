@@ -1,0 +1,53 @@
+name: Relatar um bug
+description: Informe um comportamento incorreto ou regressão
+title: "[BUG] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: Obrigado por ajudar a melhorar a Norte4j API. Não inclua segredos ou dados pessoais.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Resumo
+      description: O que aconteceu e qual era o comportamento esperado?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Passos para reproduzir
+      placeholder: Liste passos mínimos, endpoint, método e payload sanitizado.
+    validations:
+      required: true
+  - type: dropdown
+    id: implementation
+    attributes:
+      label: Implementação afetada
+      options:
+        - NestJS atual
+        - Spring Boot em migração
+        - Ambas
+        - Não sei
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Versão, commit ou ambiente
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs ou evidências sanitizadas
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Verificações
+      options:
+        - label: Procurei issues duplicadas.
+          required: true
+        - label: Removi credenciais, tokens e dados pessoais.
+          required: true
+        - label: Este relato não é uma vulnerabilidade de segurança; vulnerabilidades serão enviadas conforme SECURITY.md.
+          required: true
