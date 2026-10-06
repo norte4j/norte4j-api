@@ -1,0 +1,43 @@
+name: Tarefa de engenharia
+description: Refatoração, dívida técnica, infraestrutura, testes ou documentação
+title: "[TASK] "
+labels: ["engineering", "triage"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto
+      description: Explique o estado atual, a motivação e dependências.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Escopo
+      description: Liste o que deve e o que não deve ser alterado.
+    validations:
+      required: true
+  - type: textarea
+    id: approach
+    attributes:
+      label: Abordagem sugerida
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceite
+      placeholder: "- [ ] Critério verificável"
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Riscos e rollback
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Verificações
+      options:
+        - label: A tarefa possui escopo pequeno o suficiente para uma PR revisável.
+          required: true
+        - label: Não inclui credenciais nem dados sensíveis.
+          required: true
