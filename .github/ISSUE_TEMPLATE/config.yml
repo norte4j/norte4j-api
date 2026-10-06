@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Reportar vulnerabilidade
+    url: https://github.com/norte4j/norte4j-api/security/advisories/new
+    about: Envie vulnerabilidades de forma privada; não abra uma issue pública.
+  - name: Discussões da comunidade
+    url: https://github.com/norte4j/norte4j-api/discussions
+    about: Use para perguntas e ideias que ainda não são uma issue acionável.
