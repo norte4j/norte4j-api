@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: norte4j-api
+  datasource:
+    # Sem defaults: em production a ausência falha no startup com "Could not resolve placeholder 'DB_...'".
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT:3306}/${DB_DATABASE}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    # Desligado até a #4: o banco atual tem schema TypeORM sem tabela de histórico do Flyway.
+    enabled: ${FLYWAY_ENABLED:false}
+    locations: classpath:db/migration
+
+server:
+  # Porta própria para rodar ao lado do NestJS (PORT=3000) durante a migração.
+  port: ${API_V2_PORT:3001}
+  error:
+    include-stacktrace: never
+    include-message: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+    import: optional:file:.env[.properties]
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_DATABASE:norte4j}
+    username: ${DB_USERNAME:norte4j}
+
+management:
+  endpoint:
+    health:
+      show-details: always
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  flyway:
+    enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: production
