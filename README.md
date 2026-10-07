@@ -17,7 +17,23 @@ O site envia eventos públicos para `POST /api/analytics/events`. As métricas i
 
 API NestJS com MySQL, TypeORM e autenticação JWT para o site e CMS Norte4j.
 
-## Configuração
+## V2 em Spring Boot (em migração)
+
+A reescrita em Spring Boot ([#2](https://github.com/norte4j/norte4j-api/issues/2)) convive com o NestJS na mesma raiz até o cutover ([#16](https://github.com/norte4j/norte4j-api/issues/16)). Decisões em [`docs/adr/0001-bootstrap-spring-boot.md`](docs/adr/0001-bootstrap-spring-boot.md).
+
+Requisitos: JDK 25 e Docker (usado pelo Testcontainers nos testes e pelo `bootTestRun`).
+
+```bash
+./gradlew bootRun        # profile local; lê o .env (DB_*) e sobe em http://localhost:3001
+./gradlew bootTestRun    # sobe a API com um MySQL temporário via Testcontainers
+./gradlew test           # testes (exige Docker)
+./gradlew spotlessApply  # formata o código
+./gradlew check          # Spotless, PMD e testes
+```
+
+Profiles: `local` (padrão do `bootRun`), `test` e `production`. O `production` não tem defaults: se faltar `DB_HOST`, `DB_DATABASE`, `DB_USERNAME` ou `DB_PASSWORD`, a aplicação falha na subida indicando a variável. A API V2 usa a porta `API_V2_PORT` (padrão `3001`) para rodar ao lado do NestJS. O health fica em `GET /actuator/health`; as demais rotas ficam negadas até a [#8](https://github.com/norte4j/norte4j-api/issues/8).
+
+## Configuração (NestJS)
 
 1. Crie o banco: `CREATE DATABASE norte4j CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`.
 2. Copie `.env.example` para `.env` e configure MySQL, segredo JWT e credenciais iniciais do administrador.
