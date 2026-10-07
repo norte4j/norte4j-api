@@ -5,3 +5,10 @@ package-lock.json
 norte4j-firebase-adminsdk-fbsvc-50db3b004d.json
 dist
 /uploads
+
+# Gradle / Spring Boot (V2)
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+out/
+*.iml
